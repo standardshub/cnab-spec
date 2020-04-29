@@ -85,7 +85,7 @@ Finally, if attackers somehow also compromise the `root` key, which SHOULD be ke
 This subsection discusses how to extend the MVP to verify the provenance of bundles. We do this by transparently including in-toto metadata using TUF as a [compromise-resilient transport protocol](https://www.datadoghq.com/blog/engineering/secure-publication-of-datadog-agent-integrations-with-tuf-and-in-toto/). Figure 2 illustrates our simple metadata repository for a bundle.
 
 <figure>
- <img src="images/example-tuf-in-toto-repositories.png" alt="Extending the MVP metadata repository for a bundle">
+ <img src="images/example-tuf-in-toto-repository.png" alt="Extending the MVP metadata repository for a bundle">
  <figcaption>Extending the MVP metadata repository for a bundle</figcaption> 
 </figure>
 
