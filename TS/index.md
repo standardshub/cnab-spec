@@ -1,8 +1,30 @@
 ---
-title: Index
-weight: 001
+title: "Cloud Native Application Bundle"
+status: "Draft"
+version: "1.0"
+date: "2020 04 27"
+documentName: "CNAB-TS-Specifications-V1_0-2020MMDD-D"
+files:
+  - 100-CNAB.md
+  - 101-bundle-json.md
+  - 102-invocation-image.md
+  - 103-bundle-runtime.md
+  - 104-bundle-formats.md
+  - 200-CNAB-registries.md
+  - 300-CNAB-security.md
+  - 301-metadata-repositories.md
+  - 302-signing-workflows.md
+  - 303-verification-workflows.md
+  - 400-claims.md
+  - 500-CNAB-dependencies.md
+  - 801-declarative-images.md
+  - 802-credentials-sets.md
+  - 803-repositories.md
+  - 804-well-known-custom-actions.md
+  - 805-airgap.md
+  - 901-process.md
 ---
-
+```
 # CNAB Specifications
 
 1. [Cloud Native Application Bundle Core 1.0.0 (CNAB1)](100-CNAB.md)
@@ -21,3 +43,4 @@ weight: 001
     - [Disconnected Scenarios](805-airgap.md)
 6. Process Documentation
     - [Specification Process](901-process.md)
+```
