@@ -1,13 +1,8 @@
----
-title: Credential Sets
-weight: 802
----
-
-# Credential Sets
+## Credential Sets
 
 This is a non-normative section that describes how credentials can be passed into an invocation image. This strategy is implemented by `duffle`.
 
-## Credential Mapping
+### Credential Mapping
 
 In the bundle descriptor, credentials are declared like this:
 
@@ -66,7 +61,7 @@ Similar tooling could choose to load the values by name from a database, vault, 
 
 The created and modified timestamps are in [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format.
 
-## Credential Injection
+### Credential Injection
 
 Credentials must be injected into the runtime of the invocation image. The following strategies are known to work:
 

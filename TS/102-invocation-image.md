@@ -1,9 +1,4 @@
----
-title: The Invocation Images
-weight: 102
----
-
-# The Invocation Images
+## The Invocation Images
 
 The `invocationImages` section of a `bundle.json` MUST contain at least one image (the invocation image). This image MUST be formatted according to the specification laid out in the present document.
 The appropriate invocation image is selected by the CNAB runtime.
@@ -12,7 +7,7 @@ When a bundle is executed, the invocation image will be retrieved (if necessary)
 
 This section describes the layout of an invocation image.
 
-## Components of an Invocation Image
+### Components of an Invocation Image
 
 An invocation image is composed of the following:
 
@@ -23,7 +18,7 @@ An invocation image is composed of the following:
 
 Note that the bundle definition itself is not stored inside of the invocation image.
 
-### The File System Layout
+#### The File System Layout
 
 The following exhibits the filesystem layout:
 
@@ -43,7 +38,7 @@ cnab/                  # REQUIRED top-level directory
         └── sfmesh-deploy.json
 ```
 
-### The `/cnab` Directory
+#### The `/cnab` Directory
 
 An invocation image MUST have a directory named `cnab` placed directly under the root of the file system hierarchy inside of an image. This directory MUST have a subdirectory named `app`.
 
@@ -59,13 +54,13 @@ This `cnab` directory MAY have any of the following:
 
 This directory MUST NOT have any files or directories not explicitly named in the present document. The `/cnab` directory is considered a reserved namespace where future CNAB revisions MAY place new files or directories.
 
-### The `/cnab/app` Directory
+#### The `/cnab/app` Directory
 
 The `app/` directory contains subdirectories, each of which stores configuration for a particular target environment. The `app/run` file _MUST be an executable file_ that will act as the "main" installer for this CNAB bundle. This is the only file that is REQUIRED in this directory.
 
 The contents beneath `/cnab/app/SUBDIRECTORY` are undefined by the spec. `run` is considered the only reserved word underneath `/cnab/app/`
 
-### The OPTIONAL `/cnab/build` Directory
+#### The OPTIONAL `/cnab/build` Directory
 
 The directory `/cnab/build` MAY be present within the CNAB hierarchy. This directory houses files used in the construction of the invocation image, and are provided to make it easier to rebuild the image during rewrite operations. If a `Dockerfile` was used to build the image, a `Dockerfile` SHOULD be included. Other files MAY be included.
 
@@ -73,7 +68,7 @@ Examples:
 - `packer.json`
 - `Dockerfile.arm32`
 
-#### Dockerfiles for Constructing Invocation Images
+##### Dockerfiles for Constructing Invocation Images
 
 This subsection is non-normative. Images may be built using any suitable tooling, but this section describes the process using a `Dockerfile`.
 
@@ -98,7 +93,7 @@ CMD /cnab/app/run
 
 The above example installs and configures Helm inside of a base Ubuntu image. Note that there are no restrictions on what tools MAY be installed.
 
-## The Run Tool
+### The Run Tool
 
 The run tool MUST be located at the path `/cnab/app/run`. It MUST be executable. It MUST react to the `CNAB_ACTION` provided to it.
 

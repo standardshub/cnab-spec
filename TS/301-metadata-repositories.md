@@ -1,9 +1,4 @@
----
-title: CNAB Security: Metadata repositories
-weight: 301
----
-
-# Metadata repositories
+## Metadata repositories
 
 * [Metadata repositories](#metadata-repositories)
 * [Minimum viable product (MVP)](#minimum-viable-product-mvp)
@@ -15,7 +10,7 @@ This document is a _normative_ part of [CNAB Security](300-CNAB-security.md).
 
 The keywords MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in [RFC 2119](https://tools.ietf.org/html/rfc2119). The use of these keywords in this document are statements about how a CNAB implementation may fulfill the CNAB Security specification _only_.
 
-## Metadata repositories
+### Metadata repositories
 
 A _metadata repository_ is a service that hosts The Update Framework (TUF) and in-toto metadata about bundles. As discussed in [300](300-CNAB-security.md), TUF adds signed metadata that provides authenticity and integrity of bundles between [CNAB registries](200-CNAB-registries.md) and users, whereas in-toto adds signed metadata that provides authenticity and integrity of bundles between developers and CNAB registries. By combining both types of signed metadata, we get end-to-end authenticity and integrity of bundles between developers and users.
 
@@ -26,12 +21,14 @@ Note that:
 * Trust for different metadata repositories with different roots of trust can be established out-of-band using an approach like [TAP 4](https://github.com/theupdateframework/taps/blob/master/tap4.md). For example, a bundle runtime could be shipped with known good copies of TUF `root` metadata for different repositories, or there could even be a meta metadata repository that distributes these `root` metadata.
 * How to establish whether a `root` metadata file is trustworthy is outside the scope of this document. Simply assuming a `root` metadata file is trustworthy (e.g., by "clicking through") voids all guarantees (of end-to-end authenticity and integrity of bundles) provided by the corresponding metadata repository.
 
-## Minimum viable product (MVP)
+### Minimum viable product (MVP)
 
 This subsection discusses the simplest way that developers MAY set up a metadata repository for their bundle. Every bundle MAY use a separate metadata repository on the same server, even if two or more bundles are maintained by the same group of developers. (This is similar to how images are signed using [Docker Content Trust](https://docs.docker.com/engine/security/trust/content_trust/). As noted earlier, the MVP has been optimized for [Docker Content Trust / Notary 0.6.1](https://github.com/theupdateframework/notary/releases/tag/v0.6.1). Nevertheless, note that developers MAY use _different_ servers to host metadata repositories for bundles. In [303](303-verification-workflows.md), we discuss how a bundle runtime MAY securely resolve different bundles from different metadata repositories on different servers.) Figure 1 illustrates our simple metadata repository for a bundle.
 
-![Figure 1: An MVP metadata repository for a bundle](img/example-tuf-repository.png)
-**Figure 1**: An MVP metadata repository for a bundle.
+<figure>
+	<img scr="img/example-tuf-repository.png" alt="An MVP metadata repository for a bundle.">
+	<figcaption>An MVP metadata repository for a bundle.</figcaption> 
+</figure>
 
 The metadata repository for a bundle SHOULD provide at least the TUF metadata for the four top-level roles: `root`, `timestamp`, `snapshot`, and `targets`.
 
@@ -68,7 +65,7 @@ The following code listing is an example of the `targets` metadata for a bundle:
 
 For operational simplicity, bundles that share the same developers MAY share `root` and `targets` keys across different metadata repositories for these bundles.
 
-### Security analysis of MVP
+#### Security analysis of MVP
 
 With regard to key management, we assume that the `root` and `targets` keys are kept offline from the metadata repository, perhaps on private infrastructure controlled by the bundle developers. In contrast, we assume that `timestamp` and `snapshot` keys are kept online on the metadata repository.
 
@@ -83,12 +80,14 @@ However, if attackers also compromise, say, the private infrastructure controlle
 
 Finally, if attackers somehow also compromise the `root` key, which SHOULD be kept securely on, say, a disconnected [hardware security module](https://en.wikipedia.org/wiki/Hardware_security_module) within the aforementioned private infrastructure, then attackers can not only sign off malicious versions of bundles, but also rotate all keys on the metadata repository. Nevertheless, developers can still use the `root` key to rotate all keys, including itself, for end-users who have not yet downloaded malicious versions of bundles. Other end-users will need to reset their systems, and update out-of-band.
 
-## Extending the MVP to verify the provenance of bundles
+### Extending the MVP to verify the provenance of bundles
 
 This subsection discusses how to extend the MVP to verify the provenance of bundles. We do this by transparently including in-toto metadata using TUF as a [compromise-resilient transport protocol](https://www.datadoghq.com/blog/engineering/secure-publication-of-datadog-agent-integrations-with-tuf-and-in-toto/). Figure 2 illustrates our simple metadata repository for a bundle.
 
-![Figure 2: Extending the MVP metadata repository for a bundle](img/example-tuf-in-toto-repository.png)
-**Figure 2**: Extending the MVP metadata repository for a bundle.
+<figure>
+	<img scr="img/example-tuf-in-toto-repositories.png" alt="Extending the MVP metadata repository for a bundle">
+	<figcaption>Extending the MVP metadata repository for a bundle</figcaption> 
+</figure>
 
 Instead of signing for new versions of a bundle itself, the `targets` role here SHOULD sign targets metadata about:
 
@@ -209,7 +208,7 @@ The following code listing is an example of the `targets/releases` metadata for 
 }
 ```
 
-### Security analysis of extension
+#### Security analysis of extension
 
 The biggest difference between this extension and the MVP itself is that there is now compromise-resilient distribution of the software supply chain for the bundle using the in-toto root layout. In addition to the assurances of the MVP, this provides additional assurance that attackers cannot change the rules of the software supply chain governing how this bundle was produced.
 

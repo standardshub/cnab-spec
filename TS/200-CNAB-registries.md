@@ -1,9 +1,4 @@
----
-title: Registries
-weight: 200
----
-
-# CNAB Registries 1.0
+## CNAB Registries 1.0
 Draft, Feb. 2020
 
 ![cnab-registry](https://user-images.githubusercontent.com/686194/61753147-2b387a80-ad63-11e9-8a63-f250bcdf06b0.png)

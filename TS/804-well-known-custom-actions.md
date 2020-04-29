@@ -1,9 +1,4 @@
----
-title: Well known custom actions
-weight: 805
----
-
-# Well known custom actions
+## Well known custom actions
 
 This section is non-normative, but is here to propose a common set of optional actions a CNAB package MAY implement, and that CNAB tools can understand.
 

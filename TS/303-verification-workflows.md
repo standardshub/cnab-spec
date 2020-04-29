@@ -1,9 +1,4 @@
----
-title: CNAB Security: Verification workflows
-weight: 303
----
-
-# Verification workflows
+## Verification workflows
 
 - [Verification workflows](#verification-workflows)
 
@@ -11,7 +6,7 @@ This document is a _prescriptive_ part of [CNAB Security](300-CNAB-security.md).
 
 The keywords MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in [RFC 2119](https://tools.ietf.org/html/rfc2119). The use of these keywords in this document are statements about how a CNAB implementation may fulfill the CNAB Security specification _only_.
 
-## Verification workflows
+### Verification workflows
 
 This section describes the verification workflow that runtimes compliant with the CNAB Security Specifications MUST perform in order to verify the provenance and attestation of bundles. Regardless of [the bundle format][bundle-formats], the verification workflow is the same, with the signature of a thin bundle being the content digest of the `bundle.json` file, while the signature of a thick bundle being the content digest of the bundle archive.
 

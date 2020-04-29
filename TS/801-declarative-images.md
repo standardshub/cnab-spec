@@ -1,19 +1,14 @@
----
-title: Declarative Invocation Images
-weight: 801
----
-
-# Declarative Invocation Images
+## Declarative Invocation Images
 
 This section is non-normative. A CNAB implementation MAY implement this portion to be considered conforming. However, this section maps out what the authors consider a best practice.
 
-## Declarative Infrastructure and Declarative Installers
+### Declarative Infrastructure and Declarative Installers
 
 In declarative models, authors express the desired entities to be produced during an action. Declarative infrastructure, for example, is the practice of declaring which objects should exist in an infrastructure layer. Likewise, declarative installers provide authors with tools for describing what the installed program should look like. It is then left to the tooling to realize the authors' expression.
 
 This section of the documentation explains how CNAB can be used to create declarative CNAB bundles by leveraging _invocation image middleware_.
 
-## Invocation Image Middleware
+### Invocation Image Middleware
 
 As described in [the Invocation Image definition](102-invocation-image.md) and [the Bundle Runtime definition](103-bundle-runtime.md), the invocation image is responsible for executing an _action_ (install, upgrade, uninstall) inside of the image.
 
@@ -57,7 +52,7 @@ The `cnab/armbase` middleware provides the tools necessary for executing Azure R
 
 The middleware image (`cnab/armbase`) contains tooling that looks in predefined locations for ARM templates, and understands how to install, upgrade, and uninstall those resources.
 
-## Why Is This Non-normative?
+### Why Is This Non-normative?
 
 While declarative invocation images are considered the best practice, they are non-normative because CNAB does not require specific images to be used as base images. The CNAB definition is focused on describing the conditions under which a bundle MAY be correctly packaged and executed. We have chosen, however, to not prescribe the shape of the CNAB executable.
 

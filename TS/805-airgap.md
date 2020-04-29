@@ -1,18 +1,13 @@
----
-title: Disconnected Scenario
-weight: 805
----
-
-# Disconnected Scenarios
+## Disconnected Scenarios
 
 This section is non-normative and describes the disconnected (air gapped) scenario mentioned in the introduction of [CNAB-Core](100-CNAB.md).
 
-## Summary
+### Summary
 
 Using CNAB in a disconnected environment involves transferring a bundle and its images into the 
 environment such that the bundle can be installed and the bundled software executed successfully. 
 
-## Internet Access
+### Internet Access
 
 A typical disconnected scenario will have limited, intermittent or no internet access, whether by design or by situation.
 To install a bundle directly in a disconnected environment, the bundle and its images need to be included in a [CNAB thick bundle](104-bundle-formats.md)
@@ -21,7 +16,7 @@ and transferred into the disconnected environment, for instance on a USB stick.
 Alternatively, if a DMZ is available, it may be possible to read the bundle and/or its images from an external network
 and write the bundle and/or its images to a registry inside the disconnected environment. 
 
-## Private Registries
+### Private Registries
 
 Common cloud patterns today reference artifacts and code from multiple sources as described in
 [CNAB-Sec](300-CNAB-security.md).
@@ -38,7 +33,7 @@ A private registry:
     * This provides isolation from unwanted updates or deletion of the original bundle or image.
     * If the bundle or image becomes stale, for instance when it has known vulnerabilities, it can be deleted.
 
-## CNAB Thick Bundles
+### CNAB Thick Bundles
 
 A CNAB thick bundle provides a convenient archive format for transferring a bundle and its images into a 
 disconnected environment. But thick bundles have other benefits.
@@ -52,7 +47,7 @@ Archiving a CNAB and its images at a point of time as a CNAB thick bundle
 provides protection against modification or deletion of images and also provides a central location for code
 auditing and digital forensics of all code and references used in the CNAB.
 
-## Image Relocation
+### Image Relocation
 
 When the images of a CNAB are _relocated_ to (that is, stored in), a private registry, the images should be loaded from the private registry when they are run.
 This ensures that CNAB operations can function properly even if the original image repositories are unavailable.
