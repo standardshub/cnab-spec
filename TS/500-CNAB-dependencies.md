@@ -1,9 +1,4 @@
----
-title: Dependencies
-weight: 500
----
-
-# CNAB Dependencies 1.0
+## CNAB Dependencies 1.0
 Draft, April. 2019
 
 This specification describes how bundles can define dependencies on other
@@ -11,7 +6,7 @@ bundles.
 
 This specification, the CNAB Dependencies specification, is not part of the CNAB Core specification. An implementation of CNAB Core MAY NOT implement this specification, yet still claim compliance with CNAB Core. A CNAB implementation MUST NOT claim to be CNAB Dependencies-compliant unless it meets this specification.
 
-# Overview
+## Overview
 
 One way for a bundle author to manage the complexity of a large bundle and reuse
 common logic is to create bundles for discrete components, such as managing
@@ -29,7 +24,7 @@ There are two cases for how a bundle may need to depend upon another bundle:
 1. [Depend on a named bundle](#depend-on-a-named-bundle)
 1. [Depend on a bundle that provides a capability](#depend-on-a-bundle-that-provides-a-capability)
 
-## Depend on a named bundle
+### Depend on a named bundle
 
 The bundle depends on a specific named bundle that is known in advance. It is 
 stored in the custom extensions section of the bundle.
@@ -55,11 +50,11 @@ stored in the custom extensions section of the bundle.
 }
 ```
 
-## Depend on a bundle that provides a capability
+### Depend on a bundle that provides a capability
 
 This section is a placeholder and will be completed in a follow-up pull request.
 
-## Dependencies Metadata
+### Dependencies Metadata
 
 This specification introduces a `dependencies` object in the bundle.json
 that defines metadata necessary to specify a dependency.
@@ -67,7 +62,7 @@ that defines metadata necessary to specify a dependency.
 The entry `dependencies` in the custom extension map, `custom`, is reserved and
 MUST only be used for this CNAB Dependencies Specification.
 
-### requires
+#### requires
 
 The `requires` map defines the criteria for the dependent bundle. The key for
 each dependency is a way for the bundle to reference the dependency.

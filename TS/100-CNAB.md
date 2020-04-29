@@ -1,9 +1,4 @@
----
-title: CNAB Core
-weight: 100
----
-
-# Cloud Native Application Bundle Core 1.0.0 (CNAB1)
+## Cloud Native Application Bundle Core 1.0.0 (CNAB1)
 *[Final Approval, Published](901-process.md), Sept. 2019*
 
 
@@ -13,7 +8,7 @@ CNAB is not a platform-specific tool. While it uses *containers* for encapsulati
 
 CNAB can also be used for packaging other distributed applications, such as IoT or edge computing.
 
-## Summary
+### Summary
 
 The CNAB format is a packaging format for a broad range of distributed applications. It specifies a pairing of a _bundle definition_ [(`bundle.json`)](101-bundle-json.md) to define the app, and an _invocation image_ to install the app.
 
@@ -42,7 +37,7 @@ Bundles use cryptographic verification on multiple levels. Images (Docker, OCI, 
 
 Finally, this document describes a format for invocation images, including file system layout and a functional description of how an invocation image is installed.
 
-## Approach
+### Approach
 
 The current distributed computing landscape involves a combination of executable units and supporting API-based services. Executable units include Virtual Machines (VMs), Containers (e.g. Docker and OCI) and Functions-as-a-Service (FaaS), as well as higher-level PaaS services. Along with these executable units, many managed cloud services (from load balancers to databases) are provisioned and interconnected via REST (and similar network-accessible) APIs. Our goal is to provide a packaging format that can enable application providers and developers with a way of installing a multi-component application into a distributed computing environment, supporting all of the above types.
 
@@ -57,7 +52,7 @@ Invocation images allow limited configuration, as defined in two places in the b
 - A bundle definition MAY declare zero or more configurable parameters. User-supplied parameters are injected into the invocation image. Parameters MAY be stored.
 - A bundle definition MAY declare zero or more credential requirements. This indicates which credentials MUST be passed into the invocation image in order for the invocation image to correctly authenticate to the services used by the bundle. Credentials are injected into the invocation image, but they MUST NOT be stored.
 
-### Key Terms
+#### Key Terms
 
 - Application: The functional unit composed by the components described in a bundle. This MAY be comprised of a mixture of containers, VMs, IaaS and PaaS definitions, and other services, as well as instructions for orchestrators and service frameworks.
 - Bundle: the collection of CNAB data and metadata necessary for installing an application on the designated cloud services.
@@ -77,7 +72,7 @@ Individual tools may meet more than one of the definitions above, they have been
 
 > A runtime MUST support the 'install', 'upgrade', and 'uninstall' actions, while bundle tooling MAY choose not to implement 'upgrade'.
 
-### The Definitions
+#### The Definitions
 
 The following subsections define the components of CNAB:
 
@@ -89,7 +84,7 @@ The process for standardization is described in an appendix:
 
 - [Specification Process](901-process.md)
 
-## History
+### History
 
 - The `bundle.cnab` is now the name of a signed `bundle.json`.
 - The `bundle.json` is now a stand-alone artifact, not part of the invocation image.

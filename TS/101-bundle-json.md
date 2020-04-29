@@ -1,9 +1,4 @@
----
-title: The bundle.json File
-weight: 101
----
-
-# The bundle.json File
+## The bundle.json File
 
 This section describes the format and function of the `bundle.json` document.
 
@@ -240,7 +235,7 @@ Source: [101.02-bundle.json](examples/101.02-bundle.json)
 
 In descriptions below, fields marked REQUIRED MUST be present in any conformant bundle descriptor, while fields not thusly marked are considered optional.
 
-## Dotted Names
+### Dotted Names
 
 Within this specification, certain user-supplied names SHOULD be expressed in the form of a _dotted name_, which is defined herein as a name composed by concatenating name components together, separated by dot (`.`) characters. Name components contain only Unicode characters with the General Category of Letter (L) and the dash (`-`) character. Whitespace characters are not allowed within names, and there is no escape sequence for the dot character.
 A string MUST have at least one dot to be considered a _dotted name_.
@@ -258,7 +253,7 @@ Examples:
 - `snʇɐʇs.uoıʇɔɐ.ǝʃdɯɐxǝ.ƃɹo`
 - `example.foo` (This format MAY be used, but the reverse DNS format is preferred)
 
-## Schema Version
+### Schema Version
 
 Every `bundle.json` MUST have a `schemaVersion` element.
 
@@ -270,7 +265,7 @@ The schema version must reference the version of the schema used for this docume
 
 The current schema version is `v1.0.0`, which is considered stable.
 
-## Name and Version: Identifying Metadata
+### Name and Version: Identifying Metadata
 
 The `name` and `version` fields are used to identify the CNAB bundle. Both fields are REQUIRED.
 Fields that do not match this specification SHOULD cause failures.
@@ -280,7 +275,7 @@ Fields that do not match this specification SHOULD cause failures.
 
 The Unicode graphic character set allowed for `name` includes letters, numbers, punctuation, symbols, and spaces; it does not include newlines or tabs.
 
-## Informational Metadata
+### Informational Metadata
 
 The following fields are informational pieces of metadata designed to convey additional information about a bundle, but not to be used as identification for a bundle:
 
@@ -292,7 +287,7 @@ The following fields are informational pieces of metadata designed to convey add
   - `email`: Maintainer's email
   - `url`: URL to relevant maintainer information
 
-## Invocation Images
+### Invocation Images
 
 The `invocationImages` section describes the images that are responsible for bootstrapping the installation. The appropriate invocation image is selected by the CNAB runtime, typically by considering the runtime requirements of the bundle. For example, both a Windows and a Linux version of the invocation image may be included in the list. It is up to the CNAB runtime to determine which one to use. If no sufficient image is found, the CNAB runtime MUST emit an error and stop processing. If multiple images match the criterion set by the user, the runtime MUST execute only one, and MUST execute the first match as determined by the order of the `invocationImages` list.
 
@@ -322,7 +317,7 @@ The following OPTIONAL fields MAY be attached to an invocation image:
 - `labels`: Key/value pairs that used to specify identifying attributes of invocation images
 - `mediaType`: The media type of the image
 
-## The Image Map
+### The Image Map
 
 The `bundle.json` maps image metadata (name, origin, tag) to placeholders within the bundle. This allows images to be renamed, relabeled, or replaced during the CNAB bundle build operation.
 
@@ -358,7 +353,7 @@ Fields:
   - `labels`: Key/value pairs that used to specify identifying attributes of images:
   - `mediaType`: The media type of the image
 
-## Definitions
+### Definitions
 
 The `definitions` section of the `bundle.json` defines set of JSONSchema definitions outlining how bundle configuration should be validated by a runtime.
 
@@ -417,7 +412,7 @@ For more information on the supported definition properties, review the the [def
 
 Evaluation of the validation keywords should conform to the applicable sections of [Section 6 of the JSONSchema specification](https://tools.ietf.org/html/draft-handrews-json-schema-validation-01#section-6).
 
-## Parameters
+### Parameters
 
 The `parameters` and `definitions` sections of the `bundle.json` define which parameters a user (person installing a CNAB bundle) MAY configure on an invocation image and how those parameters should be validated by a runtime. Parameters represent information about the application configuration, and may be persisted by the runtime.
 
@@ -463,7 +458,7 @@ Parameter names (the keys in `parameters`) ought to conform to the [Open Group B
 
 > The term _parameters_ indicates the present specification of what can be provided to a bundle. The term _values_ is frequently used to indicate the user-supplied values which are tested against the parameter definitions.
 
-### Format of Parameter/Definition Specification
+#### Format of Parameter/Definition Specification
 
 The structure of a `parameters` and `definitions` section looks like the section below.
 
@@ -544,7 +539,7 @@ The structure of a `parameters` and `definitions` section looks like the section
 
 See [The Bundle Runtime](103-bundle-runtime.md) for details of how parameters are injected into the invocation image.
 
-### Examples
+#### Examples
 
 Below are a few more complicated examples that outline some of the possible parameter configurations that a bundle author can expose.
 
@@ -634,7 +629,7 @@ Check out the [JSON Schema specification](https://json-schema.org/) for more exa
 }
 ```
 
-### Resolving Destinations
+#### Resolving Destinations
 
 When resolving destinations, there are two ways a particular parameter value MAY be placed into the invocation image. Here is an example illustrating both:
 
@@ -677,7 +672,7 @@ If `path` is set, the value of the parameter will be written into a file at the 
 
 If both `env` and `path` are specified, implementations MUST put a copy of the data in each destination.
 
-## Credentials
+### Credentials
 
 A `bundle.json` MAY contain a section that describes which credentials the bundle expects to have access to in the invocation image. This information is provided so that users can be informed about the credentials that are required by the invocation image in order for the invocation image to perform its tasks.
 
@@ -718,7 +713,7 @@ If `env` is set, the value of the credential MUST be assigned to the given envir
 
 If `path` is set, the value of the credential MUST be written into a file at the specified location on the invocation image's filesystem. This file name MUST NOT be present already on the invocation image's filesystem.
 
-### Resolving Destination Conflicts in Environment Variables and Paths
+#### Resolving Destination Conflicts in Environment Variables and Paths
 
 Parameters and credentials may specify environment variables or paths as destinations.
 
@@ -729,7 +724,7 @@ Parameters and credentials may specify environment variables or paths as destina
 - Implementations MUST NOT allow a parameter or credential to override any environment variable with the `CNAB_` prefix
   - The `CNAB_` variables are defined in the [Bundle Runtime Description](./103-bundle-runtime.md) of this specification
 
-## Custom Actions
+### Custom Actions
 
 Every implementation of a CNAB tool MUST support three built-in actions:
 
@@ -784,7 +779,7 @@ The built-in actions (`install`, `upgrade`, `uninstall`) MUST NOT appear in the 
 
 Implementations that do not support custom actions MUST NOT emit errors (either runtime or validation) if a bundle defines custom actions. That is, even if an implementation cannot execute custom actions, it MUST NOT fail to operate on bundles that declare custom actions.
 
-## Custom Extensions
+### Custom Extensions
 
 In many cases, the bundle descriptor is a sufficient artifact for delivering a CNAB bundle, since invocation images and other images may be retrieved from registries and repositories. However, it is important to provide an extension mechanism. A _custom extension_ is a named collection of auxiliary data whose meaning is defined outside of this specification.
 
@@ -822,7 +817,7 @@ The fields are defined as follows:
   - `EXTENSION NAME`: a unique name for an extension. Names SHOULD follow the dotted name format described earlier in this section.
   - The value of the extension must be valid JSON, but is otherwise undefined.
 
-### Required Extensions
+#### Required Extensions
 
 Some extensions defined in the `custom` object of a bundle MAY be required in order for a runtime to perform any action on the bundle. A bundle author MUST use the `requiredExtensions` array to define those extensions that are required. The `requiredExtensions` array SHOULD contain the `EXTENSION NAME` defined in the `custom` object for each extension that is required.
 
@@ -938,7 +933,7 @@ A runtime MUST check that it supports any required extensions before performing 
 
 Source: [101.03-bundle.json](examples/101.03-bundle.json)
 
-## Outputs
+### Outputs
 
 The `outputs` section of the `bundle.json` defines which outputs an application will produce during the course of executing a bundle. Outputs are expected to be written to one or more files on the file system of the invocation image. The location of this file MUST be provided in the output definition.
 

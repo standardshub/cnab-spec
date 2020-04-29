@@ -1,9 +1,4 @@
----
-title: CNAB Security: Signing workflows
-weight: 302
----
-
-# Signing Workflows
+## Signing Workflows
 
 * [Signing workflow for the minimum viable product (MVP)](#signing-workflow-for-the-minimum-viable-product-mvp)
 
@@ -11,11 +6,11 @@ This document is a _normative_ part of [CNAB Security](300-CNAB-security.md).
 
 The keywords MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in [RFC 2119](https://tools.ietf.org/html/rfc2119). The use of these keywords in this document are statements about how a CNAB implementation may fulfill the CNAB Security specification _only_.
 
-## Signing workflow for the minimum viable product (MVP)
+### Signing workflow for the minimum viable product (MVP)
 
 This subsection documents how a signing workflow MAY typically work for an [MVP metadata repository](301-metadata-repositories.md). To reiterate, this document is normative, and while a CNAB-Sec-compliant implementation may borrow ideas from here, it MAY also choose to implement different signing workflows, especially for security models different from those described in the MVP.
 
-### Setup (one-time task)
+#### Setup (one-time task)
 
 When bundle developers set up an MVP metadata repository for the first time, they SHOULD use one of the [known implementations of CNAB-Sec](304-known-implementations) to set up at least a complete set of the `root`, `timestamp`, `snapshot`, and `targets` TUF metadata.
 
@@ -33,7 +28,7 @@ If developers wish to use in-toto to [verify the provenance for their bundles](3
 
 The exactly details are out of the scope of this document. However, the interested reader MAY consult the [Datadog TUF and in-toto integration](https://www.datadoghq.com/blog/engineering/secure-publication-of-datadog-agent-integrations-with-tuf-and-in-toto/) for an example of how to do so.
 
-### New or updated bundles (periodic task)
+#### New or updated bundles (periodic task)
 
 Whenever developers wish to release a new version of a bundle, they SHOULD perform the following steps.
 
@@ -43,7 +38,7 @@ Second, regardless of whether developers or the metadata repository holds these 
 
 If developers wish to use in-toto to [verify the provenance for their bundles](301-metadata-repositories.md#extending-the-MVP-to-verify-the-provenance-of-bundles), then they SHOULD also sign new `targets/releases`, instead of `targets` metadata as above, to point to new versions of bundles as well as associated in-toto link metadata.
 
-### Recovering from a key compromise (exceptional task)
+#### Recovering from a key compromise (exceptional task)
 
 If the private key for the `timestamp`, `snapshot`, `targets`, or `targets/releases` role has been compromised, then developers SHOULD rotate their keys using the `root` metadata. Furthermore, if the `targets` or `targets/releases` role key was compromised, developers SHOULD warn users about the possibility of having accidentally installed malicious versions of bundles.
 

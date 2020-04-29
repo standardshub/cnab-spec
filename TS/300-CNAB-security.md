@@ -1,9 +1,4 @@
----
-title: Bundle Security
-weight: 300
----
-
-# Cloud Native Application Bundles Security (CNAB-Sec) 1.0.0
+## Cloud Native Application Bundles Security (CNAB-Sec) 1.0.0
 Draft, Feb. 2020
 
 * [Introduction](#introduction)
@@ -25,7 +20,7 @@ This specification is distinct from the CNAB Core specification. An implementati
 
 > An earlier version of the CNAB Core specification used OpenPGP-based mechanism to sign and verify bundles. This specification supersedes that portion of the specification.
 
-## Introduction
+### Introduction
 
 It is important to sign bundles and images so that attackers cannot tamper with them without being detected. To enable faster deployments, they are likely to be built and signed by continuous integration / continuous delivery (CI/CD) instead of developers. While CI/CD provides benefits such as safer handling of signing keys, it also has a severe drawback. Since signing keys must be kept _online_ so that CI/CD can build and sign new bundles or images on demand, attackers who compromise the infrastructure can also abuse these keys to build, sign, and distribute malicious versions. The goal of this document is to discuss how to achieve _compromise-resilience_ in this setting: that is, even if the infrastructure is compromised anywhere between developers and end-users, attackers should not be able to cause end-users to install malicious versions of bundles or images that were not released by developers.
 
@@ -35,7 +30,7 @@ We propose using [The Update Framework (TUF)](https://theupdateframework.com) an
 
  Signing and verifying [claims](400-claims.md) are out of the scope of this document.
 
-## Roadmap
+### Roadmap
 
 The basic idea is to use TUF as a transport protocol that distributes several files in a compromise-resilient manner:
 
@@ -51,7 +46,7 @@ When a [bundle runtime](103-bundle-runtime.md) installs a bundle, it should firs
 
 [**TODO** Figure 1 illustrates a high-level overview of how the components described in this document interact with each other.]
 
-### Gradual security
+#### Gradual security
 
 Implementors / adopters MAY wish to implement security gradually instead of an all-or-nothing approach.
 
