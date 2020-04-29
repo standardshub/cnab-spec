@@ -26,8 +26,8 @@ Note that:
 This subsection discusses the simplest way that developers MAY set up a metadata repository for their bundle. Every bundle MAY use a separate metadata repository on the same server, even if two or more bundles are maintained by the same group of developers. (This is similar to how images are signed using [Docker Content Trust](https://docs.docker.com/engine/security/trust/content_trust/). As noted earlier, the MVP has been optimized for [Docker Content Trust / Notary 0.6.1](https://github.com/theupdateframework/notary/releases/tag/v0.6.1). Nevertheless, note that developers MAY use _different_ servers to host metadata repositories for bundles. In [303](303-verification-workflows.md), we discuss how a bundle runtime MAY securely resolve different bundles from different metadata repositories on different servers.) Figure 1 illustrates our simple metadata repository for a bundle.
 
 <figure>
-	<img scr="img/example-tuf-repository.png" alt="An MVP metadata repository for a bundle.">
-	<figcaption>An MVP metadata repository for a bundle.</figcaption> 
+ <img src="img/example-tuf-repository.png" alt="An MVP metadata repository for a bundle.">
+ <figcaption>An MVP metadata repository for a bundle.</figcaption> 
 </figure>
 
 The metadata repository for a bundle SHOULD provide at least the TUF metadata for the four top-level roles: `root`, `timestamp`, `snapshot`, and `targets`.
@@ -85,7 +85,7 @@ Finally, if attackers somehow also compromise the `root` key, which SHOULD be ke
 This subsection discusses how to extend the MVP to verify the provenance of bundles. We do this by transparently including in-toto metadata using TUF as a [compromise-resilient transport protocol](https://www.datadoghq.com/blog/engineering/secure-publication-of-datadog-agent-integrations-with-tuf-and-in-toto/). Figure 2 illustrates our simple metadata repository for a bundle.
 
 <figure>
-	<img scr="img/example-tuf-in-toto-repositories.png" alt="Extending the MVP metadata repository for a bundle">
+	<img src="img/example-tuf-in-toto-repositories.png" alt="Extending the MVP metadata repository for a bundle">
 	<figcaption>Extending the MVP metadata repository for a bundle</figcaption> 
 </figure>
 
